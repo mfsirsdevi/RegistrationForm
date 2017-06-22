@@ -1,9 +1,9 @@
 component {
 
-    this.name = "firstproject";
+    this.name = "registrationform";
     this.sessionmanagement = "yes";
-    this.applicationTimeout = CreateTimeSpan(10, 0, 0, 0); //10 days
-    this.datasource = "firstproject";
+    this.applicationTimeout = CreateTimeSpan(0, 0, 20, 0); //10 days
+    this.datasource = "registrationformdb";
 
     function onApplicationStart() {
         return true;

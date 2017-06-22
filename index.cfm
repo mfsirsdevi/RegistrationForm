@@ -24,16 +24,17 @@
   <body>
     <div class="container">
         <h1 class="text-center">Registration Form </h1>
-        <cfset controllerObject = CreateObject("component", "controller.RegistrationController")/>
+        <!--- <cfset controllerObject = CreateObject("component", "controller.RegistrationController")/>
         <cfif StructKeyExists(form, "registerbtn")>
           <cfset message = controllerObject.registerUser(name = "#form.name#", email = "#form.email#", password = "#form.password#", cPassword = "#form.cpassword#")/>
-        </cfif>
-        <cfif IsDefined("message")>
+        </cfif> --->
         <div class="text-center">
-            <cfoutput> #message# </cfoutput>
+            <!--- <cfif IsDefined("message")>
+                <cfoutput> "#message#" </cfoutput>
+            </cfif> --->
         </div>
-        </cfif>
-        <cfform class="form-horizontal" id="register-user">
+        <div id="mainspace">
+            <cfform class="form-horizontal" id="register-user">
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Name</label>
                 <div class="col-md-6">
@@ -69,14 +70,30 @@
                     <button name="registerbtn" type="submit" class="btn btn-primary">
                         <i class="fa fa-btn fa-user"></i> Register
                     </button>
-                    <a class="btn btn-link" href="views/login.cfm">Existing User</a>
                 </div>
             </div>
-        </cfform>
+            </cfform>
+        </div>
     </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success!</h4>
+      </div>
+      <div class="modal-body">
+        <p>Congrats, you have successfully submitted the form</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
     <script src="http://code.jquery.com/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
     <script src="assets/jqueryvalidation/dist/jquery.validate.js"></script>
-    <script src="assets/script.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
