@@ -38,7 +38,7 @@ $(document).ready(function(){
 			$.ajax({
 		        type:'post',
 		        url: "../../controller/RegistrationController.cfc?method=registerUser" ,
-		        data:{'name':$(name).val(), 'email':$(email).val(), 'password':$(password).val(), 'cPassword':$(cPassword).val()},
+		        data:{'name': name.val(), 'email': email.val(), 'password': password.val()},
 		        success:function(data){
 		        	var responseObj = $.parseJSON(data);
 		        	//$('#success-modal').modal('show');
