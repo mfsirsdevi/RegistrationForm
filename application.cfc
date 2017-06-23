@@ -10,24 +10,27 @@ component {
     }
 
     function onSessionStart() {
-      var SESSION.isLogged = "false";
-      var SESSION.email = "";
-      var SESSION.name = "";
     }
 
-    // the target page is passed in for reference, 
-    // but you are not required to include it
-    //function onRequestStart( string targetPage ) {}
+    function onRequestStart( string template ) {
 
-    //function onRequest( string targetPage ) {
-    //    include arguments.targetPage;
-    //}
+      LOCAL.path = {};
+      LOCAL.path.basePath = getDirectoryFromPath(getCurrentTemplatePath());
 
-    //function onRequestEnd() {}
+      LOCAL.path.targetPath = getDirectoryFromPath(expandPath( ARGUMENTS.template ));
 
-    //function onSessionEnd( struct SessionScope, struct ApplicationScope ) {}
+      LOCAL.path.requestDepth = (listLen( LOCAL.path.targetPath, "\/" ) - listLen( LOCAL.path.basePath, "\/" ));
+      REQUEST.webRoot = repeatString("../", LOCAL.path.requestDepth);
 
-    //function onApplicationEnd( struct ApplicationScope ) {}
+      REQUEST.siteUrl = ("http://" & cgi.server_name & reReplace(getDirectoryFromPath( ARGUMENTS.template ), "([^\\/]+[\\/]){#LOCAL.path.requestDepth#}$", "", "one"));
+
+      return true;
+    }
+
+    function onRequest( string targetPage ) {
+        include ARGUMENTS.targetPage;
+        return;
+    }
 
     //function onError( any Exception, string EventName ) {}
 

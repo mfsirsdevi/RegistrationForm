@@ -1,5 +1,7 @@
 component {
 
+  include "../include/include.cfm";
+
   /**
     * Function to create a record of new user.
     * @param string name - contains name of the user.
@@ -8,17 +10,24 @@ component {
     * @return - Returns boolean value based on whether record created or not.
     */
     
-  public boolean function createUser(string name, string email, string password)
+  public boolean function createUser(required string name, required string email, required string password)
   {
-    
-    var pwd = Hash(password);
-    newUser = new Query();
-    newUser.setSQL("INSERT into dbo.users (name, email, password) VALUES (:name, :email, :password)");
-    newUser.addParam( name = "name", value = "#arguments.name#", cfsqltype = "cf_sql_varchar" );
-    newUser.addParam( name = "email", value = "#arguments.email#", cfsqltype = "cf_sql_varchar" );
-    newUser.addParam( name = "password", value = "#LOCAL.pwd#", cfsqltype = "cf_sql_varchar" );
-    result = newUser.execute();
-    return "true";
+    try{
+      LOCAL.pwd = Hash(password);
+      LOCAL.newUser = new Query();
+      LOCAL.newUser.setSQL("INSERT into dbo.users (name, email, password) VALUES (:name, :email, :password)");
+      LOCAL.newUser.addParam( name = "name", value = "#ARGUMENTS.name#", cfsqltype = "cf_sql_varchar" );
+      LOCAL.newUser.addParam( name = "email", value = "#ARGUMENTS.email#", cfsqltype = "cf_sql_varchar" );
+      LOCAL.newUser.addParam( name = "password", value = "#LOCAL.pwd#", cfsqltype = "cf_sql_varchar" );
+      LOCAL.result = LOCAL.newUser.execute();
+      if(LOCAL.result.getPrefix().recordcount EQ 1)
+        return true;
+      return false;
+    }
+    catch(any exception) {
+      error.errorLog(exception);
+      return false;
+    }
   }
   
   /**
@@ -27,12 +36,12 @@ component {
     * @return - Returns string value based on whether record created or not.
     */
   
-  public any function searchUser(string email)
+  public struct function searchUser(string email)
   {
-    checkUser = new Query();
-    checkUser.setSQL("SELECT * FROM dbo.users WHERE email = :email");
-    checkUser.addParam( name = "email", value = "#arguments.email#", cfsqltype = "cf_sql_varchar" );
-    returnValue = checkUser.execute();
-      return returnValue;
+    LOCAL.checkUser = new Query();
+    LOCAL.checkUser.setSQL("SELECT * FROM dbo.users WHERE email = :email");
+    LOCAL.checkUser.addParam( name = "email", value = "#ARGUMENTS.email#", cfsqltype = "cf_sql_varchar" );
+    LOCAL.returnValue = LOCAL.checkUser.execute();
+    return LOCAL.returnValue;
   }
 }

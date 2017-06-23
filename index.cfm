@@ -28,7 +28,7 @@
         <cfif StructKeyExists(form, "registerbtn")>
           <cfset message = controllerObject.registerUser(name = "#form.name#", email = "#form.email#", password = "#form.password#", cPassword = "#form.cpassword#")/>
         </cfif> --->
-        <div class="text-center">
+        <div id="error-msg" class="text-center">
             <!--- <cfif IsDefined("message")>
                 <cfoutput> "#message#" </cfoutput>
             </cfif> --->
