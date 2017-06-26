@@ -16,14 +16,12 @@
         <h1 class="text-center">Image Uploader</h1>
         <div id="wrapper" class="row">
             <div class="col-xs-6">
-                <form id="form1" runat="server">
-                    <input type='file' id="imgInp" />
+                <form id="img-form" enctype="multipart/form-data">
+                    <input name="image" type='file' id="imgInp" />
                 </form>
             </div>
             <div id="img-preview" class="col-xs-6">
-                <div>
-                    <img id="img-holder" src="#" alt="your image" />
-                </div>
+                    <p>Preview Section</p>
             </div>
         </div>
     </div>
