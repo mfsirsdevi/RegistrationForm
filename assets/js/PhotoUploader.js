@@ -30,7 +30,7 @@ $(document).on("click", "#cancel-btn", function() {
     $("#img-form")[0].reset();
     addParagraph();
 });
-
+//chaining
 $(document).on("click", "#sbt-btn", function() {
     var formData = new FormData($("#img-form")[0]);
     $.ajax({

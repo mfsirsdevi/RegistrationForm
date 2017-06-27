@@ -11,6 +11,7 @@ component {
   remote struct function uploadImage() returnformat = "JSON" {
     LOCAL.imageUploader = CreateObject("component", "model.ImageModel");
     LOCAL.responseObj = {};
+    // regex - 
     LOCAL.baseUrl = "D:\Projects\RegistrationForm\assets\img\";
     LOCAL.imageName = fileUpload(LOCAL.baseUrl & "profileImage_" & "#dateFormat(now())#" & ".jpg", "image", "image/jpeg", "makeunique");
     try {
